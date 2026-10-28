@@ -1,5 +1,7 @@
-# Ex.No:1a  			Study of Socket Programming
+# Ex.No:1a     Study of Socket Programming
 
+## Name:SHERIL.P
+## Register number:212225230262
 ## Aim: 
 To perform a study on Socket Programming
 ## Introduction:
@@ -52,6 +54,61 @@ Socket programming finds applications in various domains, including web developm
 3.	File Transfer Protocol: Protocols like FTP (File Transfer Protocol) utilize socket programming for transferring files between a client and a server.
 4.	Networked Games: Online multiplayer games rely on socket programming to facilitate communication between game clients and servers.
 5.	RPC mechanisms: which allow processes to execute code on a remote server, often use socket programming for communication.
+
+## Program:
+
+## client:
+```
+
+import socket
+
+s = socket.socket()
+s.connect(('localhost', 8000))
+
+while True:
+    data = s.recv(1024).decode()
+    print("Server:", data)
+
+    ack = input("Enter acknowledgement: ")
+    s.send(ack.encode())
+
+```
+## Server:
+```
+
+import socket
+
+s = socket.socket()
+s.bind(('localhost', 8000))
+s.listen(5)
+
+print("Waiting for client...")
+c, addr = s.accept()
+print("Client connected")
+
+while True:
+    i = input("Enter a data: ")
+    c.send(i.encode())
+
+    ack = c.recv(1024).decode()
+    if ack:
+        print("Acknowledgement:", ack)
+    else:
+        c.close()
+        break
+
+```
+
+## Output:
+
+## client:
+
+<img width="1227" height="262" alt="image" src="https://github.com/user-attachments/assets/40e95aa3-a4af-400b-837d-4c2b9fe4d75d" />
+
+
+## server:
+
+<img width="1227" height="247" alt="image" src="https://github.com/user-attachments/assets/f78741a2-8469-490d-bc5d-48e4da25310c" />
 
 
 ## Result:
